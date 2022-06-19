@@ -1,0 +1,33 @@
+images:
+  airflow:
+    repository: "lindaindicina/airflow-dag"
+    pullPolicy: IfNotPresent
+    tag: ""
+
+webserverSecretKey: f50c34d5169d5aa3161684bc8bc6cb67
+
+webserver:
+  replicas: 1
+  service:
+    type: NodePort
+  defaultUser:
+    enabled: true
+    email: oluchi@fakeemail.com
+    role: Admin
+    username: airflow
+    password: airflow
+
+flower:
+  enabled: true
+
+dags:
+  persistence:
+    # Enable persistent volume for storing dags
+    enabled: true
+    # Volume size for dags
+    size: 1Gi
+    # If using a custom storageClass, pass name here
+    storageClassName: "default"
+    # access mode of the persistent volume
+    accessMode: ReadWriteOnce
+    ## the name of an existing PVC to use
